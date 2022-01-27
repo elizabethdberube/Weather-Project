@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="./assets/search.css" />  -->
+    <link rel="stylesheet" href="./assets/style.css" />
+    <title>Weather Dashboard</title>
+</head>
+
+<body>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4 header-text">Weather Dashboard </h1>
+        </div>
+
+    </div>
+
+    <form>
+        <div class="form-row" id="search-form">
+
+            <div class="form-row p-3 my-3">
+                <div class="col-md-6 ">
+                    <label for="validationDefault03" class="label-words">Search for a City:</label>
+                    <input type="text" class="form-control" id="validationDefault03" required>
+
+                </div>
+
+                <div class="form-group">
+                    <div class="form-check">
+
+                        <label class="form-check-label" for="invalidCheck2">
+                        </label>
+                    </div>
+                </div>
+    </form>
+    <button class="btn btn-primary" type="submit">Search</button>
+
+    <!--d-none you can chane to display block-->
+    <div class="card p-3 my-3 d-none" style="width: 18rem;">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"></li>
+            <li class="list-group-item"></li>
+            <li class="list-group-item"></li>
+            <li class="list-group-item"></li>
+            <li class="list-group-item"></li>
+        </ul>
+    </div>
+
+    <div class="container five-day-weather">
+        <div class="row col-centered">
+            <p class="five-day">5-Day Forecast:</p>
+            <div class="col-md my-3 ">
+                One of three columns
+            </div>
+            <div class="col-md  my-3">
+                One of three columns
+            </div>
+            <div class="col-md my-3">
+                One of three columns
+            </div>
+        </div>
+    </div>
+    <script src="./assets/script.js"></script>
+</body>
+
+</html>

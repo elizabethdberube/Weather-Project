@@ -1,0 +1,33 @@
+:root {
+ 
+    --blue:  #151c2f;
+    --white: white;
+    
+  }
+
+  body {
+    background-color: var(--blue);
+
+    font-family: 'roboto','Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+}
+
+.label-words {
+
+  color: var(--white);
+}
+
+.header-text {
+  color: var(--blue);
+}
+
+.five-day {
+  color: var(--white);
+}
+
+.col-centered {
+  float: none;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
