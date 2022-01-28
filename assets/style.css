@@ -24,10 +24,11 @@
   color: var(--white);
 }
 
-.col-centered {
-  float: none;
-  margin-right: auto;
-  margin-left: auto;
+
+.card {
+  color: var(--blue); 
 }
 
-
+#time-now {
+  color: var(--blue);
+}

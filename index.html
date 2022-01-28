@@ -15,6 +15,8 @@
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <h1 class="display-4 header-text">Weather Dashboard </h1>
+            <span id="time-now" class="time-block">00:00:00</span>
+            <p id="currentDay" class="lead"></p>
         </div>
 
     </div>
@@ -23,9 +25,9 @@
         <div class="form-row" id="search-form">
 
             <div class="form-row p-3 my-3">
-                <div class="col-md-6 ">
+                <div class="col-sm-2 ">
                     <label for="validationDefault03" class="label-words">Search for a City:</label>
-                    <input type="text" class="form-control" id="validationDefault03" required>
+                    <input type="text" class="form-control" id="validation" required>
 
                 </div>
 
@@ -37,34 +39,43 @@
                     </div>
                 </div>
     </form>
-    <button class="btn btn-primary" type="submit">Search</button>
+    <button id="search-button" class="btn btn-primary" type="submit">Search</button>
 
-    <!--d-none you can chane to display block-->
-    <div class="card p-3 my-3 d-none" style="width: 18rem;">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item"></li>
-            <li class="list-group-item"></li>
-            <li class="list-group-item"></li>
-            <li class="list-group-item"></li>
-            <li class="list-group-item"></li>
-        </ul>
+    <div class="card text-center mx-auto">
+        <div class="card-header">
+            Current weather for:
+        </div>
+        <div class="card-body">
+            <h5 id="search-button" class="card-title">Special title treatment</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+        </div>
+        <div class="card-footer text-muted">
+            2 days ago
+        </div>
     </div>
 
-    <div class="container five-day-weather">
-        <div class="row col-centered">
+
+
+    <div class="container mx-auto">
+        <div class="row">
             <!-- <p class="five-day">5-Day Forecast:</p> -->
-            <div class="col-md my-3 ">
+            <div class="col-md">
                 One of three columns
             </div>
-            <div class="col-md  my-3">
+            <div class="col-md">
                 One of three columns
             </div>
-            <div class="col-md my-3">
+            <div class="col-md">
                 One of three columns
             </div>
         </div>
     </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/script.js"></script>
+
 </body>
 
 </html>

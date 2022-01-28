@@ -1,26 +1,56 @@
 const searchForm = document.querySelector('#search-form');
 const fiveDay = document.querySelector('#five-day');
-const myApiKey = "";
-const inputVal = input.value;
-const theURL = `api.openweathermap.org/data/2.5/weather?q={inputVal}%appid={myApiKey}`;
+const myApiKey = "206ec34e199d83935bbe9730429e302d";
+const cardBody = document.querySelector('card-body');
+const validation = document.getElementById('validation');
+var timeNow = document.getElementById('time-now');
 
-fetch(theURL)
-.then(function (response){
-if(!response){
-    msg.textContent = "Please search for a valid city";
-    throw response.json();
+function showTime() {
+ 
+  var whatTime = moment().format('dddd, MMMM Do, YYYY');
+  timeNow.text = whatTime;
+
 }
-  return response.json
-    });
- //write results to page
-.then (  )
+showTime();
 
+ function displaySearch (){
+  
+  const inputVal = validation.value;
+  const theURL = `https://api.openweathermap.org/data/2.5/weather?q=${inputVal}&appid=${myApiKey}`;
+  //const theURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + inputVal + '&appid=' + myApiKey;
+  fetch(theURL)
+  .then(function (response){
+  if(!response){
+      msg.textContent = "Please search for a valid city";
+      throw response.json();
+     
+  }
+    else {
+  const { main, name, sys, weather } = response;
+  const icon = `https://openweathermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
+  
 
-
-searchForm.addEventListener("submit", e => {
-    e.preventDefault();
-    const inputvVal = input.value;
+  const li = document.createElement("li");
+  li.classList.add("city");
+  const markup = `<h2 class="city-name="${name},${sys.country}">
+                   <span>${name}</span>
+                   <sup>${sys.country}</sup>
+                   </h2>
+                   <div class="city-temp>${Math.round(main.temp)}<sup>°C</sup>
+                   </div>
+                   <figure>
+                   <img  class="city--icon" src=${icon} alt=${weather[0]["main"]}>
+                   <figcaption>${weather[0]["description"]}</figcaption>
+                   </figure>`;
+    }
+ li.innerhtml = markup;
+ cardBody.appendChild(li);
 });
+ }
+
+const searchButton = document.getElementById("search-button");
+searchForm.addEventListener('click', displaySearch);
+  
 //function searchFormSubmit(event) {
   //  event.preventDefault();
 
