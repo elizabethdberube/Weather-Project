@@ -1,12 +1,12 @@
 const searchForm = document.querySelector('#search-form');
 const fiveDay = document.querySelector('#five-day');
 const myApiKey = "206ec34e199d83935bbe9730429e302d";
-const cardBody = document.querySelector('card-body');
+const cardBody = document.querySelector('.card-body');
 const validation = document.getElementById('validationDefault03');
 const weatherFive = document.getElementById('weather-five');
 const timeNow = document.getElementById('time-now');
-
-const saveTheWeather = [];
+const msg = document.getElementById('div-msg');
+var saveTheWeather = [];
 
 
 function showTime() {
@@ -17,13 +17,19 @@ function showTime() {
 }
 showTime();
 
-function displaySearch() {
+function displaySearch(event) {
+  event.preventDefault();
 
   const inputVal = validation.value;
   const theURL = `https://api.openweathermap.org/data/2.5/weather?q=${inputVal}&appid=${myApiKey}`;
   //const theURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + inputVal + '&appid=' + myApiKey;
   fetch(theURL)
+
+    .then((response) => {
+      return response.json();
+    })
     .then(function (response) {
+
       if (!response) {
         msg.textContent = "Please search for a valid city";
         throw response.json();
@@ -31,6 +37,7 @@ function displaySearch() {
       }
       else {
         const { main, name, sys, weather } = response;
+        console.log(weather);
         const icon = `https://openweathermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
 
 
@@ -47,7 +54,7 @@ function displaySearch() {
                    <figcaption>${weather[0]["description"]}</figcaption>
                    </figure>`;
 
-        li.innerhtml = markup;
+        li.innerHTML = markup;
         cardBody.appendChild(li);
         saveTheWeather.push(inputVal);
         localStorage.setItem("myWeather", JSON.stringify(saveTheWeather));
@@ -106,9 +113,10 @@ function saveTheCity() {
         cardBody.appendChild(li);
         saveTheWeather.push(inputVal);
         localStorage.setItem("myWeather", JSON.stringify(saveTheWeather));
-
+        displayFiveDay();
 
       });
+
   }
 
   function displayFiveDay() {
@@ -146,13 +154,13 @@ function saveTheCity() {
         }
       });
   }
+}
 
 
 
 
-
-  const searchButton = document.getElementById("search-button");
-  searchForm.addEventListener('click', displaySearch, displayFiveDay);
+const searchButton = document.getElementById("search-button");
+searchButton.addEventListener('click', displaySearch);
 //needs function
 
 
