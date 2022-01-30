@@ -5,8 +5,9 @@ const cardBody = document.querySelector('card-body');
 const validation = document.getElementById('validationDefault03');
 const weatherFive = document.getElementById('weather-five');
 const timeNow = document.getElementById('time-now');
-const savedCities = document.getElementById('saved-cities');
-const SaveTheWeather = [];
+
+const saveTheWeather = [];
+
 
 function showTime() {
 
@@ -49,7 +50,7 @@ function displaySearch() {
         li.innerhtml = markup;
         cardBody.appendChild(li);
         saveTheWeather.push(inputVal);
-        localStorage.setItem("myWeather", JSON.stringify(SaveTheWeather));
+        localStorage.setItem("myWeather", JSON.stringify(saveTheWeather));
 
       }
       saveTheCity()
@@ -59,30 +60,31 @@ function displaySearch() {
 
 function saveTheCity() {
 
-  for (var i = 0; i < SaveTheWeather.length; i++) {
-    const button = document.createElement("button");
-    button.classList.add("city");
-    const markup = `<button class="old-city" id="find-city" ${saveTheWeather}"</button>`
-    button.innerhtml = markup;
-    savedCities.appendChild(button);
-  }
+  saveTheWeather = JSON.parse(localStorage.getItem("myWeather")) || [];
+  saveTheWeather.push(data);
+  const button = getItem(this);
+  const savedCities = button.find('button.saved-cities')
 
-}
+  saveTheWeather.array.forEach(function () {
 
 
-function displayFiveDay() {
+    if (button = display = "none") {
+      button = display = "block";
+      button.innerhtml = saveTheWeather;
+    }
+    if (button.addEventListener('click',)) {
+      theNewWeather();
+    }
+  });
 
-  const inputVal = validation.value;
-  const FiveDayURL = `https:/api.openweathermap.org/data/2.5/forecast?q=${inputVal}&appid=${myApiKey}`;
+  function theNewWeather() {
 
-  fetch(FiveDayURL)
-    .then(function (response) {
-      if (!response) {
-
-        throw response.json();
-
-      }
-      else {
+    const inputVal = saveTheWeather.value;
+    const theURL = `https://api.openweathermap.org/data/2.5/weather?q=${inputVal}&appid=${myApiKey}`;
+    //const theURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + inputVal + '&appid=' + myApiKey;
+    fetch(theURL)
+      .then(function () {
+        cardBody.innerhtml = "";
         const { main, name, sys, weather } = response;
         const icon = `https://openweathermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
 
@@ -101,20 +103,58 @@ function displayFiveDay() {
                    </figure>`;
 
         li.innerhtml = markup;
-        weatherFive.appendChild(li);
-      }
-    });
-}
+        cardBody.appendChild(li);
+        saveTheWeather.push(inputVal);
+        localStorage.setItem("myWeather", JSON.stringify(saveTheWeather));
+
+
+      });
+  }
+
+  function displayFiveDay() {
+
+    const inputVal = validation.value;
+    const fiveDayURL = `https:/api.openweathermap.org/data/2.5/forecast?q=${inputVal}&appid=${myApiKey}`;
+
+    fetch(fiveDayURL)
+      .then(function (response) {
+        if (!response) {
+
+          throw response.json();
+
+        }
+        else {
+          const { main, name, sys, weather } = response;
+          const icon = `https://openweathermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
+
+
+          const li = document.createElement("li");
+          li.classList.add("city");
+          const markup = `<h2 class="city-name="${name},${sys.country}">
+                   <span>${name}</span>
+                   <sup>${sys.country}</sup>
+                   </h2>
+                   <div class="city-temp>${Math.round(main.temp)}<sup>°C</sup>
+                   </div>
+                   <figure>
+                   <img  class="city--icon" src=${icon} alt=${weather[0]["main"]}>
+                   <figcaption>${weather[0]["description"]}</figcaption>
+                   </figure>`;
+
+          li.innerhtml = markup;
+          weatherFive.appendChild(li);
+        }
+      });
+  }
 
 
 
 
 
-const searchButton = document.getElementById("search-button");
-searchForm.addEventListener('click', displaySearch, displayFiveDay);
+  const searchButton = document.getElementById("search-button");
+  searchForm.addEventListener('click', displaySearch, displayFiveDay);
 //needs function
-const findCity = document.getElementById("find-city");
-findCity.addEventListener('click',);
+
 
 
 
