@@ -2,7 +2,8 @@
  
     --blue:  #151c2f;
     --white: white;
-    
+    --buttonBlue: #007BFF;  
+    --whitish: #e8f0fe; 
   }
 
   body {
@@ -20,15 +21,80 @@
   color: var(--blue);
 }
 
-
-.saved.cities {
-  display: "none";
+.input-box {
+  color: var(--blue);
+  font-size: 20px;
+    font-family: 'roboto','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
+    
+    border: 2px solid var(--white);
+    margin: auto;
+    border-radius: 10px;
+    background-color: var(--white);
+  
 }
+
+.search-button {
+  border-radius: 10px;
+  background-color: var(--buttonBlue);
+  border: 2px solid var(--buttonBlue);
+  color: var(--white);
+  font-size: 14px;
+  font-family: 'roboto','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
+  margin-left: 50px;
+  margin-top: 25px;
+  height: 40px;
+ 
+
+}
+
+.search-info {
+  color: var(--white);
+  font-size: 24px;
+  font-family: 'roboto','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
+ 
+  
+}
+
+form {
+  margin: 10px;
+}
+
+#msg {
+  color: var(--white);
+  font-size: 24px;
+  font-family: 'roboto','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;   
+}
+.the-button {
+ 
+  width: 150px;
+
+}
+.saved-cities {
+  color: var(--blue);
+  font-size: 24px;
+  font-family: 'roboto','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
+  margin-top: 20px;
+  border: 2px solid var(--whitish);
+  border-radius: 10px;
+  background-color: var(--whitish);
+
+  width: 150px; 
+}
+
+
+
+
 
 .card {
   color: var(--blue); 
+  margin-left: 10%;
+  margin-right: 45%;
+  margin-top: 1%;
 }
 
+#weather-card {
+  color: var(--white)
+}
 #time-now {
   color: var(--blue);
 }

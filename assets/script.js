@@ -4,8 +4,9 @@ const myApiKey = "206ec34e199d83935bbe9730429e302d";
 const cardBody = document.querySelector('.card-body');
 const validation = document.getElementById('validationDefault03');
 const weatherFive = document.getElementById('weather-five');
+const weatherCard = document.getElementById('weather-card');
 const timeNow = document.getElementById('time-now');
-const msg = document.getElementById('div-msg');
+const msg = document.getElementById('msg');
 var saveTheWeather = [];
 
 
@@ -22,7 +23,11 @@ function displaySearch(event) {
 
   const inputVal = validation.value;
   const theURL = `https://api.openweathermap.org/data/2.5/weather?q=${inputVal}&appid=${myApiKey}`;
+  if (!inputVal) {
+    msg.textContent = "Please search for a valid city";
 
+    return;
+  }
   fetch(theURL)
 
     .then((response) => {
@@ -35,11 +40,13 @@ function displaySearch(event) {
         throw response.json();
 
       }
+
       else {
+        msg.textContent = "";
         const { main, name, sys, weather } = response;
         console.log(weather);
         const icon = `https://openweathermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
-
+        weatherCard.style.display = "inline-block";
 
         const div = document.createElement("div");
         div.classList.add("city");
@@ -90,7 +97,7 @@ function saveTheCity() {
     event.preventDefault();
 
     const inputVal = event.target.textContent;
-    const theURL = `https://api.openweathermap.org/data/2.5/weather?q=${inputVal}&appid=${myApiKey}`;
+    const theURL = `https://api.openweathermap.org/data/2.5/weather?q=${inputVal}&appid=${myApiKey}&units=imperial`;
 
     fetch(theURL)
       .then((response) => {
@@ -104,11 +111,13 @@ function saveTheCity() {
 
         const div = document.createElement("div");
         div.classList.add("city");
-        const markup = `<h2 class="city-name="${name},${sys.country}">
-                   <span>${name}</span>
-                   <sup>${sys.country}</sup>
-                   </h2>
-                   <div class="city-temp>${Math.round(main.temp)}<sup>°C</sup>
+        const markup = `<h2 class="city-name=${name},${city.country}>
+        <span>${name}</span>
+
+        <sup>${city.country}</sup>
+        </h2>
+                   
+                   <div class="city-temp">${Math.round(main.temp)}<sup>°F</sup>
                    </div>
                    <figure>
                    <img  class="city--icon" src=${icon} alt=${weather[0]["main"]}>
@@ -129,7 +138,7 @@ function saveTheCity() {
 function displayFiveDay() {
 
   const inputVal = validation.value;
-  const fiveDayURL = `https:/api.openweathermap.org/data/2.5/forecast?q=${inputVal}&appid=${myApiKey}`;
+  const fiveDayURL = `https://api.openweathermap.org/data/2.5/forecast?q=${inputVal}&appid=${myApiKey}&units=imperial`;
 
 
   fetch(fiveDayURL)
@@ -143,25 +152,31 @@ function displayFiveDay() {
 
       }
       else {
-        const { main, name, sys, weather } = response;
-        const icon = `https://openweathermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
+        const { city, list } = response;
 
+        console.log(response);
 
-        const li = document.createElement("li");
-        li.classList.add("city");
-        const markup = `<h2 class="city-name="${name},${sys.country}">
-                   <span>${name}</span>
-                   <sup>${sys.country}</sup>
-                   </h2>
-                   <div class="city-temp>${Math.round(main.temp)}<sup>°C</sup>
+        const { name, sys } = city;
+
+        // list.forEach(function (forecast) 
+        for (var i = 0; i < list.length; i += 3) {
+          var forecast = list[i];
+          const { weather, main, dt_txt } = forecast;
+          const icon = `https://openweathermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
+          const li = document.createElement("li");
+          li.classList.add("city");
+          const markup = `
+                   <div>${dt_txt}</div>
+                   <div class="city-temp">${Math.round(main.temp)}<sup>°F</sup>
                    </div>
                    <figure>
                    <img  class="city--icon" src=${icon} alt=${weather[0]["main"]}>
                    <figcaption>${weather[0]["description"]}</figcaption>
                    </figure>`;
 
-        li.innerhtml = markup;
-        weatherFive.appendChild(li);
+          li.innerHTML = markup;
+          weatherFive.appendChild(li);
+        };
       }
     });
 }
@@ -172,7 +187,7 @@ function displayFiveDay() {
 
 const searchButton = document.getElementById("search-button");
 searchButton.addEventListener('click', displaySearch);
-//needs function
+
 
 
 

@@ -24,10 +24,11 @@
         <form>
             <div class="form-row" id="search-form">
 
-                <div class="form-row px-4 my-3 mx-4">
+                <div class="form-row  my-3 mx-2">
                     <div class="col-md-6 mb-3">
-                        <label for="validationDefault03" class="label-words">Search for a City:</label>
-                        <input type="text" class="form-control input-box" id="validationDefault03" required>
+                        <label for="validationDefault03" class="label-words"></label>
+                        <input type="text" class="input-box" id="validationDefault03" placeholder="search for a city"
+                            required>
 
                     </div>
 
@@ -38,19 +39,24 @@
                             </label>
                         </div>
                     </div>
-                    <div id="div-msg"></div>
+                    <div id="msg"></div>
+
         </form>
-        <button id="search-button" class="btn btn-primary" type="submit">Search</button>
+
+
+
+
+        <div class="the-buttons">
+            <button id="search-button" class="search-button" type="submit">Search</button>
+            <button class="saved-cities " style="display:none"></button>
+            <button class="saved-cities" style="display:none"></button>
+            <button class="saved-cities" style="display:none"></button>
+            <button class="saved-cities" style="display:none"></button>
+        </div>
     </div>
 
-
-    <button class="saved-cities" display="none"></button>
-    <button class="saved-cities" display="none"></button>
-    <button class="saved-cities" display="none"></button>
-    <button class="saved-cities" display="none"></button>
-
-    <div class="card text-center mx-8">
-        <div class="card-header">
+    <div id="weather-card" style="display:none">
+        <div>
             Current weather for:
         </div>
         <div class="card-body">
@@ -58,18 +64,20 @@
             <p class="card-text"></p>
 
         </div>
-        <div class="card-footer text-muted">
-            2 days ago
-        </div>
-    </div>
-
-    <div id="weather-five" class="five-day"></div>
 
 
 
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="./assets/script.js"></script>
+
+
+
+        <div id="weather-five" class="five-day"></div>
+
+
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+        <script src="./assets/script.js"></script>
 
 </body>
 
