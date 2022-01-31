@@ -20,10 +20,10 @@
   color: var(--blue);
 }
 
-.five-day {
-  color: var(--white);
-}
 
+.saved.cities {
+  display: "none";
+}
 
 .card {
   color: var(--blue); 
@@ -31,5 +31,9 @@
 
 #time-now {
   color: var(--blue);
+}
+
+.five-day {
+  color: var(--white);
 }
 

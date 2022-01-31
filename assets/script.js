@@ -22,7 +22,7 @@ function displaySearch(event) {
 
   const inputVal = validation.value;
   const theURL = `https://api.openweathermap.org/data/2.5/weather?q=${inputVal}&appid=${myApiKey}`;
-  //const theURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + inputVal + '&appid=' + myApiKey;
+
   fetch(theURL)
 
     .then((response) => {
@@ -41,8 +41,8 @@ function displaySearch(event) {
         const icon = `https://openweathermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
 
 
-        const li = document.createElement("li");
-        li.classList.add("city");
+        const div = document.createElement("div");
+        div.classList.add("city");
         const markup = `<h2 class="city-name="${name},${sys.country}">
                    <span>${name}</span>
                    <sup>${sys.country}</sup>
@@ -54,13 +54,16 @@ function displaySearch(event) {
                    <figcaption>${weather[0]["description"]}</figcaption>
                    </figure>`;
 
-        li.innerHTML = markup;
-        cardBody.appendChild(li);
+        div.innerHTML = markup;
+        cardBody.innerHTML = "";
+        cardBody.appendChild(div);
+        saveTheWeather = JSON.parse(localStorage.getItem("myWeather")) || [];
         saveTheWeather.push(inputVal);
         localStorage.setItem("myWeather", JSON.stringify(saveTheWeather));
-
+        console.log(saveTheWeather);
       }
-      saveTheCity()
+      displayFiveDay();
+      saveTheCity();
     });
 }
 
@@ -68,30 +71,78 @@ function displaySearch(event) {
 function saveTheCity() {
 
   saveTheWeather = JSON.parse(localStorage.getItem("myWeather")) || [];
-  saveTheWeather.push(data);
-  const button = getItem(this);
-  const savedCities = button.find('button.saved-cities')
+  const savedCities = document.querySelectorAll('button.saved-cities');
 
-  saveTheWeather.array.forEach(function () {
+  savedCities.forEach(function (button) {
+    const thisCity = saveTheWeather.pop();
 
 
-    if (button = display = "none") {
-      button = display = "block";
-      button.innerhtml = saveTheWeather;
+
+    if (thisCity) {
+      button.style.display = "block";
+      button.innerHTML = thisCity;
     }
-    if (button.addEventListener('click',)) {
-      theNewWeather();
-    }
+
+    button.addEventListener('click', theNewWeather);
   });
 
-  function theNewWeather() {
+  function theNewWeather(event) {
+    event.preventDefault();
 
-    const inputVal = saveTheWeather.value;
+    const inputVal = event.target.textContent;
     const theURL = `https://api.openweathermap.org/data/2.5/weather?q=${inputVal}&appid=${myApiKey}`;
-    //const theURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + inputVal + '&appid=' + myApiKey;
+
     fetch(theURL)
-      .then(function () {
-        cardBody.innerhtml = "";
+      .then((response) => {
+        return response.json();
+      })
+      .then(function (response) {
+        cardBody.innerHTML = "";
+        const { main, name, sys, weather } = response;
+        const icon = `https://openweathermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
+
+
+        const div = document.createElement("div");
+        div.classList.add("city");
+        const markup = `<h2 class="city-name="${name},${sys.country}">
+                   <span>${name}</span>
+                   <sup>${sys.country}</sup>
+                   </h2>
+                   <div class="city-temp>${Math.round(main.temp)}<sup>°C</sup>
+                   </div>
+                   <figure>
+                   <img  class="city--icon" src=${icon} alt=${weather[0]["main"]}>
+                   <figcaption>${weather[0]["description"]}</figcaption>
+                   </figure>`;
+
+        div.innerHTML = markup;
+        cardBody.appendChild(div);
+        saveTheWeather.push(inputVal);
+        localStorage.setItem("myWeather", JSON.stringify(saveTheWeather));
+
+
+      });
+
+  }
+
+}
+function displayFiveDay() {
+
+  const inputVal = validation.value;
+  const fiveDayURL = `https:/api.openweathermap.org/data/2.5/forecast?q=${inputVal}&appid=${myApiKey}`;
+
+
+  fetch(fiveDayURL)
+    .then((response) => {
+      return response.json();
+    })
+    .then(function (response) {
+      if (!response) {
+
+        throw response.json();
+
+      }
+      else {
         const { main, name, sys, weather } = response;
         const icon = `https://openweathermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
 
@@ -110,51 +161,11 @@ function saveTheCity() {
                    </figure>`;
 
         li.innerhtml = markup;
-        cardBody.appendChild(li);
-        saveTheWeather.push(inputVal);
-        localStorage.setItem("myWeather", JSON.stringify(saveTheWeather));
-        displayFiveDay();
-
-      });
-
-  }
-
-  function displayFiveDay() {
-
-    const inputVal = validation.value;
-    const fiveDayURL = `https:/api.openweathermap.org/data/2.5/forecast?q=${inputVal}&appid=${myApiKey}`;
-
-    fetch(fiveDayURL)
-      .then(function (response) {
-        if (!response) {
-
-          throw response.json();
-
-        }
-        else {
-          const { main, name, sys, weather } = response;
-          const icon = `https://openweathermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
-
-
-          const li = document.createElement("li");
-          li.classList.add("city");
-          const markup = `<h2 class="city-name="${name},${sys.country}">
-                   <span>${name}</span>
-                   <sup>${sys.country}</sup>
-                   </h2>
-                   <div class="city-temp>${Math.round(main.temp)}<sup>°C</sup>
-                   </div>
-                   <figure>
-                   <img  class="city--icon" src=${icon} alt=${weather[0]["main"]}>
-                   <figcaption>${weather[0]["description"]}</figcaption>
-                   </figure>`;
-
-          li.innerhtml = markup;
-          weatherFive.appendChild(li);
-        }
-      });
-  }
+        weatherFive.appendChild(li);
+      }
+    });
 }
+
 
 
 
