@@ -78,6 +78,23 @@ function displayCityByLatLon(lat, lon, name, country) {
 
         const div = document.createElement("div");
         div.classList.add("city");
+        var uviClass = "";
+
+        if (uvi <= 2) {
+
+          uviClass = "UVI-low";
+
+        }
+
+        else if (uvi >= 3 && uvi <= 5) {
+          uviClass = "UVI-mod";
+
+        }
+
+        else if (uvi >= 6) {
+          uviClass = "UVI-high";
+
+        }
         const markup = `
                    <div class="weather-div">
                    <h3>Current weather for:</h3>
@@ -89,7 +106,7 @@ function displayCityByLatLon(lat, lon, name, country) {
                    <div class="city-temp">${Math.round(temp)}<sup>°F</sup>
                    </div>
                    <div class="humidity">Humidity: ${humidity}</div>
-                   <div class="UVI">UV Index: ${uvi}</div>
+                   <div class="${uviClass}">UV Index: ${uvi}</div>
                    <div class="windSpeed">Wind speed: ${wind_speed}</div>
                    <figure>
                    <img  class="city--icon" src=${icon} alt=${weather[0]["main"]}>
@@ -101,7 +118,8 @@ function displayCityByLatLon(lat, lon, name, country) {
         cardBody.innerHTML = "";
         cardBody.appendChild(div);
 
-        //daily.forEach(function (day) {
+
+
         for (var i = 1; i < 6; i++) {
           const day = daily[i];
           const { uvi, temp, humidity, weather, wind_speed, dt } = day;
