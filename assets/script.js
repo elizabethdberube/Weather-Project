@@ -78,10 +78,13 @@ function displayCityByLatLon(lat, lon, name, country) {
 
         const div = document.createElement("div");
         div.classList.add("city");
-        const markup = `<h2 class="city-name">
+        const markup = `
+                   <div class="weather-div">
+                   <h3>Current weather for:</h3>
                    <span>${name}</span>
-                   <span>${date}</span>
                    <sup>${country}</sup>
+                   <h1>${date}</h1>
+                   
                    </h2>
                    <div class="city-temp">${Math.round(temp)}<sup>°F</sup>
                    </div>
@@ -91,7 +94,8 @@ function displayCityByLatLon(lat, lon, name, country) {
                    <figure>
                    <img  class="city--icon" src=${icon} alt=${weather[0]["main"]}>
                    <figcaption>${weather[0]["description"]}</figcaption>
-                   </figure>`;
+                   </figure> 
+                   </div>`;
 
         div.innerHTML = markup;
         cardBody.innerHTML = "";
@@ -105,14 +109,16 @@ function displayCityByLatLon(lat, lon, name, country) {
 
 
           const icon = `https://openweathermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
-          weatherCard.style.display = "inline-block";
+          weatherFive.style.display = "inline-block";
 
           const div = document.createElement("div");
-          div.classList.add("city");
-          const markup = `<h2 class="city-name">
+          div.classList.add("city1");
+          const markup = `
+          <div class="five-days">
+          <h3>Five day forecast</h3>
                      <span>${name}</span>
-                     <span>${date}</span>
                      <sup>${country}</sup>
+                     <h1>${date}</h1>
                      </h2>
                      <div class="city-temp">${Math.round(temp.day)}<sup>°F</sup>
                      </div>
@@ -122,7 +128,8 @@ function displayCityByLatLon(lat, lon, name, country) {
                      <figure>
                      <img  class="city--icon" src=${icon} alt=${weather[0]["main"]}>
                      <figcaption>${weather[0]["description"]}</figcaption>
-                     </figure>`;
+                     </figure>
+                     </div>`;
 
           div.innerHTML = markup;
           cardBody.appendChild(div);

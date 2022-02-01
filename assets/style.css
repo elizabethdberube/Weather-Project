@@ -58,6 +58,7 @@ form {
 .the-button {
  
   width: 150px;
+  height: 300px;
 
 }
 /* saved cities search button */
@@ -73,19 +74,66 @@ form {
 }
 
 /* current weather */
-.card {
-  color: var(--blue); 
-  margin-left: 10%;
-  margin-right: 45%;
+.weather-div {
+  color: var(--white); 
+ margin-left: 10%;
   margin-top: 1%;
 }
 
+.current {
+  color: var(--white); 
+  margin-left: 10%;
+  margin-top: 1%;
+  display: flex;
+  flex-wrap: wrap; 
+}
+
+h1 {
+  font-size: 12px;
+}
+
+span {
+  font-size: 24px;
+}
+.city {
+  border: 2px solid var(--white);
+  border-radius: 10px;
+  margin-left: 10%;
+  padding: 5px;
+}
+
+.city1 {
+  width: 10%;
+  border: 2px solid var(--white);
+  border-radius: 10px;
+  margin-left: 5px;
+  padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 #weather-card {
-  color: var(--white)
+  color: var(--white);
+  height: 2000
+  
 }
 
 
-.five-day {
+.five-days {
   color: var(--white);
+  margin: 10px;
+  
+
+}
+
+h3 {
+  font-size: 18px;
+}
+
+.card-body {
+ 
+  display: flex;
+  flex-wrap: wrap;
+  
 }
 
