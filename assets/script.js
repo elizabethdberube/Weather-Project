@@ -103,7 +103,7 @@ function displayCityByLatLon(lat, lon, name, country) {
                    <h1>${date}</h1>
                    
                    </h2>
-                   <div class="city-temp">${Math.round(temp)}<sup>°F</sup>
+                   <div class="city-temp">Temperature: ${Math.round(temp)}<sup>°F</sup>
                    </div>
                    <div class="humidity">Humidity: ${humidity}</div>
                    <div class="${uviClass}">UV Index: ${uvi}</div>
@@ -138,7 +138,7 @@ function displayCityByLatLon(lat, lon, name, country) {
                      <sup>${country}</sup>
                      <h1>${date}</h1>
                      </h2>
-                     <div class="city-temp">${Math.round(temp.day)}<sup>°F</sup>
+                     <div class="city-temp">Temperature: ${Math.round(temp.day)}<sup>°F</sup>
                      </div>
                      <div class="humidity">Humidity: ${humidity}</div>
                      <div class="UVI">UV Index: ${uvi}</div>

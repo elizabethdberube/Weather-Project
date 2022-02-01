@@ -44,7 +44,7 @@
  
 }
 
-
+/*all form elements*/
 form {
   margin: 10px;
 }
@@ -88,13 +88,15 @@ form {
   flex-wrap: wrap; 
 }
 
+/*all h1 elements*/
 h1 {
   font-size: 12px;
 }
-
+/*all span elements*/
 span {
   font-size: 24px;
 }
+/*current weather div*/
 .city {
   border: 2px solid var(--white);
   border-radius: 10px;
@@ -102,7 +104,7 @@ span {
   padding: 5px;
   
 }
-
+/*five day forecast div*/
 .city1 {
   width: 12%;
   border: 2px solid var(--white);
@@ -119,6 +121,7 @@ span {
   
 }
 
+/*UV index highlight*/
 .UVI-low {
   background-color: green;
 }
@@ -130,18 +133,18 @@ span {
 .UVI-high {
   background-color: red;
 }
-
+/*five day weather elements*/
 .five-days {
   color: var(--white);
   margin: 10px;
   
 
 }
-
+/*all h3 elements*/
 h3 {
   font-size: 18px;
 }
-
+/*most of the weather elements*/
 .card-body {
  
   display: flex;
