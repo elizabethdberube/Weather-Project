@@ -5,25 +5,48 @@ const cardBody = document.querySelector('.card-body');
 const validation = document.getElementById('validationDefault03');
 const weatherFive = document.getElementById('weather-five');
 const weatherCard = document.getElementById('weather-card');
-const timeNow = document.getElementById('time-now');
+
 const msg = document.getElementById('msg');
 var saveTheWeather = [];
 
 
-function showTime() {
 
-  var whatTime = moment().format('dddd, MMMM Do, YYYY');
-  timeNow.text = whatTime;
 
-}
-showTime();
 
 function displaySearch(event) {
   event.preventDefault();
-
   const inputVal = validation.value;
-  const theURL = `https://api.openweathermap.org/data/2.5/weather?q=${inputVal}&appid=${myApiKey}`;
-  if (!inputVal) {
+  saveTheWeather = JSON.parse(localStorage.getItem("myWeather")) || [];
+  saveTheWeather.push(inputVal);
+  localStorage.setItem("myWeather", JSON.stringify(saveTheWeather));
+  console.log(saveTheWeather);
+  displayCityByName(inputVal);
+}
+
+function displayCityByName(name) {
+
+  if (!name) {
+
+    msg.textContent = "Please search for a valid city";
+    return;
+  }
+  const theURL = `http://api.openweathermap.org/geo/1.0/direct?q=${name}&limit=1&appid=${myApiKey}`;
+
+  fetch(theURL)
+
+    .then((response) => {
+      return response.json();
+    })
+    .then(function (response) {
+      const { lat, lon, country, name } = response[0];
+      displayCityByLatLon(lat, lon, name, country);
+
+    });
+}
+
+function displayCityByLatLon(lat, lon, name, country) {
+  const theURL = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${myApiKey}&units=imperial`;
+  if (!lat || !lon) {
     msg.textContent = "Please search for a valid city";
 
     return;
@@ -34,7 +57,7 @@ function displaySearch(event) {
       return response.json();
     })
     .then(function (response) {
-
+      console.log(response);
       if (!response) {
         msg.textContent = "Please search for a valid city";
         throw response.json();
@@ -43,19 +66,28 @@ function displaySearch(event) {
 
       else {
         msg.textContent = "";
-        const { main, name, sys, weather } = response;
-        console.log(weather);
+        const { current, daily } = response;
+
+        console.log(daily);
+        const { uvi, temp, humidity, weather, wind_speed, dt } = current;
+        const date = new Date(dt * 1000);
+        console.log("current", current);
+        console.log(temp);
         const icon = `https://openweathermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
         weatherCard.style.display = "inline-block";
 
         const div = document.createElement("div");
         div.classList.add("city");
-        const markup = `<h2 class="city-name="${name},${sys.country}">
+        const markup = `<h2 class="city-name">
                    <span>${name}</span>
-                   <sup>${sys.country}</sup>
+                   <span>${date}</span>
+                   <sup>${country}</sup>
                    </h2>
-                   <div class="city-temp>${Math.round(main.temp)}<sup>°C</sup>
+                   <div class="city-temp">${Math.round(temp)}<sup>°F</sup>
                    </div>
+                   <div class="humidity">Humidity: ${humidity}</div>
+                   <div class="UVI">UV Index: ${uvi}</div>
+                   <div class="windSpeed">Wind speed: ${wind_speed}</div>
                    <figure>
                    <img  class="city--icon" src=${icon} alt=${weather[0]["main"]}>
                    <figcaption>${weather[0]["description"]}</figcaption>
@@ -64,18 +96,46 @@ function displaySearch(event) {
         div.innerHTML = markup;
         cardBody.innerHTML = "";
         cardBody.appendChild(div);
-        saveTheWeather = JSON.parse(localStorage.getItem("myWeather")) || [];
-        saveTheWeather.push(inputVal);
-        localStorage.setItem("myWeather", JSON.stringify(saveTheWeather));
-        console.log(saveTheWeather);
+
+        //daily.forEach(function (day) {
+        for (var i = 1; i < 6; i++) {
+          const day = daily[i];
+          const { uvi, temp, humidity, weather, wind_speed, dt } = day;
+          const date = new Date(dt * 1000);
+
+
+          const icon = `https://openweathermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
+          weatherCard.style.display = "inline-block";
+
+          const div = document.createElement("div");
+          div.classList.add("city");
+          const markup = `<h2 class="city-name">
+                     <span>${name}</span>
+                     <span>${date}</span>
+                     <sup>${country}</sup>
+                     </h2>
+                     <div class="city-temp">${Math.round(temp.day)}<sup>°F</sup>
+                     </div>
+                     <div class="humidity">Humidity: ${humidity}</div>
+                     <div class="UVI">UV Index: ${uvi}</div>
+                     <div class="windSpeed">Wind speed: ${wind_speed}</div>
+                     <figure>
+                     <img  class="city--icon" src=${icon} alt=${weather[0]["main"]}>
+                     <figcaption>${weather[0]["description"]}</figcaption>
+                     </figure>`;
+
+          div.innerHTML = markup;
+          cardBody.appendChild(div);
+        };
+
       }
-      displayFiveDay();
-      saveTheCity();
+
+      updateSearchHistory();
     });
 }
 
 
-function saveTheCity() {
+function updateSearchHistory() {
 
   saveTheWeather = JSON.parse(localStorage.getItem("myWeather")) || [];
   const savedCities = document.querySelectorAll('button.saved-cities');
@@ -90,96 +150,19 @@ function saveTheCity() {
       button.innerHTML = thisCity;
     }
 
-    button.addEventListener('click', theNewWeather);
+    button.addEventListener('click', showFromHistory);
   });
 
-  function theNewWeather(event) {
+  function showFromHistory(event) {
     event.preventDefault();
-
-    const inputVal = event.target.textContent;
-    const theURL = `https://api.openweathermap.org/data/2.5/weather?q=${inputVal}&appid=${myApiKey}&units=imperial`;
-
-    fetch(theURL)
-      .then((response) => {
-        return response.json();
-      })
-      .then(function (response) {
-        cardBody.innerHTML = "";
-        const { main, name, sys, weather } = response;
-        const icon = `https://openweathermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
-
-
-        const div = document.createElement("div");
-        div.classList.add("city");
-        const markup = `<h2 class="city-name=${name},${city.country}>
-        <span>${name}</span>
-
-        <sup>${city.country}</sup>
-        </h2>
-                   
-                   <div class="city-temp">${Math.round(main.temp)}<sup>°F</sup>
-                   </div>
-                   <figure>
-                   <img  class="city--icon" src=${icon} alt=${weather[0]["main"]}>
-                   <figcaption>${weather[0]["description"]}</figcaption>
-                   </figure>`;
-
-        div.innerHTML = markup;
-        cardBody.appendChild(div);
-        saveTheWeather.push(inputVal);
-        localStorage.setItem("myWeather", JSON.stringify(saveTheWeather));
-
-
-      });
+    const button = event.target;
+    const cityName = button.textContent;
+    displayCityByName(cityName);
 
   }
 
 }
-function displayFiveDay() {
 
-  const inputVal = validation.value;
-  const fiveDayURL = `https://api.openweathermap.org/data/2.5/forecast?q=${inputVal}&appid=${myApiKey}&units=imperial`;
-
-
-  fetch(fiveDayURL)
-    .then((response) => {
-      return response.json();
-    })
-    .then(function (response) {
-      if (!response) {
-
-        throw response.json();
-
-      }
-      else {
-        const { city, list } = response;
-
-        console.log(response);
-
-        const { name, sys } = city;
-
-        // list.forEach(function (forecast) 
-        for (var i = 0; i < list.length; i += 3) {
-          var forecast = list[i];
-          const { weather, main, dt_txt } = forecast;
-          const icon = `https://openweathermap.org/img/wn/${weather[0]["icon"]}@2x.png`;
-          const li = document.createElement("li");
-          li.classList.add("city");
-          const markup = `
-                   <div>${dt_txt}</div>
-                   <div class="city-temp">${Math.round(main.temp)}<sup>°F</sup>
-                   </div>
-                   <figure>
-                   <img  class="city--icon" src=${icon} alt=${weather[0]["main"]}>
-                   <figcaption>${weather[0]["description"]}</figcaption>
-                   </figure>`;
-
-          li.innerHTML = markup;
-          weatherFive.appendChild(li);
-        };
-      }
-    });
-}
 
 
 

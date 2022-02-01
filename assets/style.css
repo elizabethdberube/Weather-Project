@@ -12,15 +12,12 @@
     font-family: 'roboto','Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
 }
 
-.label-words {
-
-  color: var(--white);
-}
-
+/* text in header*/
 .header-text {
   color: var(--blue);
 }
 
+/*search box*/
 .input-box {
   color: var(--blue);
   font-size: 20px;
@@ -33,6 +30,7 @@
   
 }
 
+/* search button */
 .search-button {
   border-radius: 10px;
   background-color: var(--buttonBlue);
@@ -44,21 +42,14 @@
   margin-top: 25px;
   height: 40px;
  
-
 }
 
-.search-info {
-  color: var(--white);
-  font-size: 24px;
-  font-family: 'roboto','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
- 
-  
-}
 
 form {
   margin: 10px;
 }
 
+/* response for blank search*/
 #msg {
   color: var(--white);
   font-size: 24px;
@@ -69,6 +60,7 @@ form {
   width: 150px;
 
 }
+/* saved cities search button */
 .saved-cities {
   color: var(--blue);
   font-size: 24px;
@@ -77,14 +69,10 @@ form {
   border: 2px solid var(--whitish);
   border-radius: 10px;
   background-color: var(--whitish);
-
   width: 150px; 
 }
 
-
-
-
-
+/* current weather */
 .card {
   color: var(--blue); 
   margin-left: 10%;
@@ -95,9 +83,7 @@ form {
 #weather-card {
   color: var(--white)
 }
-#time-now {
-  color: var(--blue);
-}
+
 
 .five-day {
   color: var(--white);
