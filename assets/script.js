@@ -150,7 +150,7 @@ function displayCityByLatLon(lat, lon, name, country) {
                      </div>
                      <div class="humidity">Humidity: ${humidity}%</div>
                      <div class="UVI">UV Index: ${uvi}</div>
-                     <div class="windSpeed">Wind speed: ${wind_speed}mph</div>
+                     <div class="windSpeed">Wind speed: ${wind_speed} mph</div>
                      <figure>
                      <img  class="city--icon" src=${icon} alt=${weather[0]["main"]}>
                      <figcaption>${weather[0]["description"]}</figcaption>
