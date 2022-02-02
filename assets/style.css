@@ -63,13 +63,13 @@ form {
 }
 /* saved cities search button */
 .saved-cities {
-  color: var(--blue);
+  color: var(--white);
   font-size: 24px;
   font-family: 'roboto','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  
   margin-top: 20px;
-  border: 2px solid var(--whitish);
+  border: 2px solid var(--white);
   border-radius: 10px;
-  background-color: var(--whitish);
+  background-color: var(--buttonBlue);
   width: 150px; 
 }
 
