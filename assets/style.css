@@ -98,15 +98,16 @@ span {
 }
 /*current weather div*/
 .city {
+  width: 250px;
   border: 2px solid var(--white);
   border-radius: 10px;
-  margin-left: 10%;
+  margin-left: 5%;
   padding: 5px;
   
 }
 /*five day forecast div*/
 .city1 {
-  width: 12%;
+  width: 170px;
   border: 2px solid var(--white);
   border-radius: 10px;
   margin-left: 5px;
