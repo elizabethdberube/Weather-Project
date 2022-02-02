@@ -31,7 +31,7 @@ function displayCityByName(name) {
 
   }
 
-  const theURL = `http://api.openweathermap.org/geo/1.0/direct?q=${name}&limit=1&appid=${myApiKey}`;
+  const theURL = `https://api.openweathermap.org/geo/1.0/direct?q=${name}&limit=1&appid=${myApiKey}`;
 
   fetch(theURL)
 
