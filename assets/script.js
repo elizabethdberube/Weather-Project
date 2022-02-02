@@ -37,7 +37,14 @@ function displayCityByName(name) {
     .then((response) => {
       return response.json();
     })
+
+
     .then(function (response) {
+      if (response) {
+        msg.textContent = "Please search for a valid city";
+        return;
+
+      }
       const { lat, lon, country, name } = response[0];
       displayCityByLatLon(lat, lon, name, country);
 
