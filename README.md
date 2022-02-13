@@ -2,6 +2,8 @@
 
 This application helps a user look up present and future forecasts by city. This will help enable users to make successful travel plans.
 
+![image](/assets/Screenshot.png)
+
 Useful features of this application:
 When a user searches for a city this application will show present and future forecasts.
 The present forecast will list the city name, the date, a weather icon, the temperature, the wind speed, and UV index. 
@@ -25,6 +27,6 @@ elizabethdberube@gmail.com
 Link to page:
 https://elizabethdberube.github.io/Weather-Project/
 
-![image](/assets/Screenshot.png)
+
 
 ![image](/assets/Screenshot2.png)
