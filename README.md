@@ -9,7 +9,22 @@ The UV index highlights with a color to let the user know if the conditions are 
 When presented with the five day forecast then it will list the date, an icon for the weather, the temperature, the wind speed and humidity. 
 There is a search history so that the user can click to see old searches. 
 
+List of technologies used:
+
+1. HTML
+2. JavaScript
+3. CSS
+
+
+Contact information:
+Phone Number:
+603-860-2579
+Email:
+elizabethdberube@gmail.com
+
 Link to page:
 https://elizabethdberube.github.io/Weather-Project/
 
 ![image](/assets/Screenshot.png)
+
+![image](/assets/Screenshot2.png)

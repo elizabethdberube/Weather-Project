@@ -63,7 +63,7 @@ function displayCityByLatLon(lat, lon, name, country) {
       return response.json();
     })
     .then(function (response) {
-
+      console.log(response);
       if (!response) {
         msg.textContent = "Please search for a valid city";
         throw response.json();
