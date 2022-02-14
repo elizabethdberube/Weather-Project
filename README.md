@@ -20,7 +20,7 @@ List of technologies used:
 
 Contact information:
 
-Email
+Elizabeth Berube
 elizabethdberube@gmail.com
 
 Link to page:
