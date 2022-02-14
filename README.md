@@ -1,4 +1,4 @@
-# Weather-Project
+# Weather Project
 
 This application helps a user look up present and future forecasts by city. This will help enable users to make successful travel plans.
 
