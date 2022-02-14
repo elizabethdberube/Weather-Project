@@ -19,9 +19,8 @@ List of technologies used:
 
 
 Contact information:
-Phone Number:
-603-860-2579
-Email:
+
+Email
 elizabethdberube@gmail.com
 
 Link to page:
